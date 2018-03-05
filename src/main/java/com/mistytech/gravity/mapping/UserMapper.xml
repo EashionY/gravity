@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mistytech.user.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.mistytech.gravity.entity.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="gender" jdbcType="VARCHAR" property="gender"/>
+    <result column="age" jdbcType="INTEGER" property="age"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, username, password, nickname, gender, age
+  </sql>
+  
+  <insert id="save" parameterType="com.mistytech.gravity.entity.User" useGeneratedKeys="true">
+    insert into user (username, password, nickname, gender, age)
+    values(#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{gender,jdbcType=VARCHAR},#{age,jdbcType=Integer})
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+  
+  </delete>
+  
+  <update id="update" parameterType="com.mistytech.gravity.entity.User">
+  
+  </update>
+  
+  <select id="findByUserId" resultType="com.mistytech.gravity.entity.User">
+    select <include refid="Base_Column_List"/>
+    from user
+    where user_id = #{userId,jdbcType=Integer}
+  </select>
+  
+  <select id="findByUsername" resultType="com.mistytech.gravity.entity.User">
+    select <include refid="Base_Column_List"/>
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+</mapper>
